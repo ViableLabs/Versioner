@@ -50,11 +50,11 @@ class VersionsController extends ApiController
     public function create(Request $request, Responder $responder)
     {
         try {
-            $this->formModel->process($request->all());
+            $obj = $this->formModel->process($request->all());
         } catch (ValidationException $exception) {
             return $responder->error(400, $this->formModel->getErrors()->toJson());
         }
 
-        return $responder->success();
+        return $responder->success(['version' => $obj->repository_version]);
     }
 }

@@ -37,6 +37,8 @@ class VersionsRepository implements BaseRepository
         }
         if (empty($data['deployment_date'])) {
             $data['deployment_date'] = Carbon::now();
+        } else {
+            $data['deployment_date'] = Carbon::parse($data['deployment_date']);
         }
         $obj = new Version();
         $obj->fill($data);
